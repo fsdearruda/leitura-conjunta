@@ -6,3 +6,9 @@
   border-radius: 8px;
   width: 50vw;
 }
+
+@media (max-width: 600px) {
+  .leaderboardItem {
+    width: 80vw;
+  }
+}
