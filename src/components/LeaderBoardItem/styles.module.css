@@ -1,28 +1,15 @@
-/* 
-Quadradinho junto
-.leaderboardItem {
-  background: #c2cad5;
-  color: #282829;
-  padding: 1em;
-  border-top: 1px solid #97979b;
-  border-left: 4px solid #c2cad5;
-  width: 50vw;
-}
- */
-
 .leaderboardItem {
   border-radius: 8px;
   margin: 0.5em;
   background: #c2cad5;
   color: #282829;
   padding: 1em;
-  border-left: 4px solid #c2cad5;
+  border-left: 3px solid #c2cad5;
   width: 50vw;
 }
 
 .highlight {
-  /*   border-left: 7px solid #4c6589; */
-  border-left: 4px solid #73a0ff;
+  border-left: 3px solid #3b5f80;
 }
 
 .points {
