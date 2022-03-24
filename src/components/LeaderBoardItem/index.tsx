@@ -32,7 +32,10 @@ const LeaderBoardItem: NextPage<ItemProps> = ({ name, points }) => {
     // @ts-ignore: Object is possibly 'null'.
     <motion.div className={`${styles.leaderboardItem} ${loggedUser.name === name ? styles.highlight : ""}`} {...animations}>
       <span>
-        {name} <span className={styles.points}>{points}</span>
+        {name}{" "}
+        <span className={styles.points}>
+          {points} <span className={styles.pages}>páginas.</span>
+        </span>
       </span>
     </motion.div>
   );
