@@ -3,6 +3,7 @@ import { AnimatePresence } from "framer-motion";
 import type { NextPage } from "next";
 import LeaderBoardItem from "../LeaderBoardItem";
 import styles from "./styles.module.css";
+
 interface User {
   name: string;
   points: number;
@@ -59,9 +60,7 @@ const LeaderBoard: NextPage = () => {
           {[...items]
             .sort((a, b) => (sorter ? b.points - a.points : a.points - b.points))
             .map(item => (
-              <LeaderBoardItem key={item.name}>
-                {item.name} {item.points}
-              </LeaderBoardItem>
+              <LeaderBoardItem name={item.name} points={item.points} key={item.name} />
             ))}
         </AnimatePresence>
       </div>

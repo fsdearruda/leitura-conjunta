@@ -1,9 +1,20 @@
 import { motion, usePresence } from "framer-motion";
 import type { NextPage } from "next";
+import styles from "./styles.module.css";
+import { useContext } from "react";
+import { UserContext } from "../../contexts/UserContext";
+
 const transition = { type: "spring", stiffness: 500, damping: 50, mass: 1 };
-import styles from "./styles.module.css"
-const LeaderBoardItem: NextPage = ({ children }) => {
+
+interface ItemProps {
+  name: string;
+  points: number;
+}
+
+const LeaderBoardItem: NextPage<ItemProps> = ({ name, points }) => {
   const [isPresent, safeToRemove] = usePresence();
+
+  const loggedUser = useContext(UserContext);
 
   const animations = {
     layout: true,
@@ -18,8 +29,11 @@ const LeaderBoardItem: NextPage = ({ children }) => {
   };
 
   return (
-    <motion.div className={styles.leaderboardItem} {...animations}>
-      <span>{children}</span>
+    // @ts-ignore: Object is possibly 'null'.
+    <motion.div className={`${styles.leaderboardItem} ${loggedUser.name === name ? styles.highlight : ""}`} {...animations}>
+      <span>
+        {name} <span className={styles.points}>{points}</span>
+      </span>
     </motion.div>
   );
 };
