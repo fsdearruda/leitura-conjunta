@@ -8,7 +8,7 @@ function useFetch<Data = any>(route: string) {
       const response = await axios.get(`/api/${route}`);
       return response.data;
     },
-    { refreshInterval: 10 * 6000 }
+    { refreshInterval: 10000 }
   );
   return { data, error };
 }
