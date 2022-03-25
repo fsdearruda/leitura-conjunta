@@ -3,3 +3,41 @@ body {
   background: #1a202c;
   font-family: "Jost", sans-serif;
 }
+.center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.button {
+  all: unset;
+  cursor: pointer;
+}
+
+.button {
+  border-radius: 50px;
+  text-align: center;
+  width: 10ch;
+  margin: 0 0.3em;
+  padding: 0.5em;
+  background: #4a5568;
+  color: #fff;
+  transition: all 100ms ease;
+}
+
+.button:hover {
+  background: #404a5a;
+}
+
+.button:hover {
+  background: #404a5a;
+}
+
+.title {
+  text-align: center;
+}
+
+.row {
+  flex-direction: row;
+}

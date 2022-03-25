@@ -1,4 +1,4 @@
-.leaderboardItem {
+.leaderBoardItem {
   border-radius: 8px;
   margin: 0.5em;
   background: #c2cad5;
@@ -17,8 +17,8 @@
   float: right;
 }
 
-@media (max-width: 600px) {
-  .leaderboardItem {
+@media (max-width: 700px) {
+  .leaderBoardItem {
     width: 80vw;
   }
 }

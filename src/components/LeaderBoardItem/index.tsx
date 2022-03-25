@@ -7,11 +7,11 @@ import { UserContext } from "../../contexts/UserContext";
 const transition = { type: "spring", stiffness: 500, damping: 50, mass: 1 };
 
 interface ItemProps {
-  name: string;
-  points: number;
+  nome: string;
+  pages: number;
 }
 
-const LeaderBoardItem: NextPage<ItemProps> = ({ name, points }) => {
+const LeaderBoardItem: NextPage<ItemProps> = ({ nome, pages }) => {
   const [isPresent, safeToRemove] = usePresence();
 
   const loggedUser = useContext(UserContext);
@@ -30,11 +30,12 @@ const LeaderBoardItem: NextPage<ItemProps> = ({ name, points }) => {
 
   return (
     // @ts-ignore: Object is possibly 'null'.
-    <motion.div className={`${styles.leaderboardItem} ${loggedUser.name === name ? styles.highlight : ""}`} {...animations}>
+
+    <motion.div className={`${styles.leaderBoardItem} ${loggedUser.name === nome ? styles.highlight : ""}`} {...animations}>
       <span>
-        {name}{" "}
+        {nome}
         <span className={styles.points}>
-          {points} <span className={styles.pages}>páginas.</span>
+          {pages} <span className={styles.pages}>páginas.</span>
         </span>
       </span>
     </motion.div>
