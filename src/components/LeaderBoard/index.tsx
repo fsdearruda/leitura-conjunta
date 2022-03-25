@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { AnimatePresence } from "framer-motion";
 import type { NextPage } from "next";
 import LeaderBoardItem from "../LeaderBoardItem";
