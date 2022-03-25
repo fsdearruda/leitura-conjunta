@@ -19,10 +19,11 @@ const Home: NextPage = () => {
     <>
       <Flex my={7} justifyContent="center" alignItems="center" direction="column">
         <Text mb={3} fontWeight={650} fontSize="3xl">
-          Ranking
+          Ranking - George Orwell 1984
         </Text>
+        <LeaderBoard users={data} />
+        <Text color="gray.400">Preview</Text>
       </Flex>
-      <LeaderBoard users={data} />
     </>
   );
 };
