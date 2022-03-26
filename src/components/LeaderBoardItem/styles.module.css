@@ -23,6 +23,12 @@
   }
 }
 
+@media (max-width: 700px) {
+  .leaderBoardItem {
+    width: 90vw;
+  }
+}
+
 .pages {
   font-size: 0.8em;
   color: #576584;
