@@ -12,7 +12,7 @@
   border-left: 3px solid #3b5f80;
 }
 
-.leaderBoardItem.highlight:hover {
+.leaderBoardItem.highlight {
   border-left: 3px solid #4299e1;
 }
 

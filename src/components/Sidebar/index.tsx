@@ -43,7 +43,7 @@ const ColorModeToggler = () => {
       role="group"
       cursor="pointer"
       _hover={{
-        bg: "blue.400",
+        bg: "#3b5f80",
         color: "white",
       }}
       transitionProperty="background-color, color"
@@ -108,7 +108,7 @@ const NavItem = ({ icon, children, ...rest }: NavItemProps) => {
         role="group"
         cursor="pointer"
         _hover={{
-          bg: "blue.400",
+          bg: "#3b5f80",
           color: "white",
         }}
         transitionProperty="background-color"
