@@ -4,12 +4,16 @@
   background: #c2cad5;
   color: #282829;
   padding: 1em;
-  border-left: 3px solid #c2cad5;
+  border-left: 0px solid #c2cad5;
   width: 50vw;
+  transition: border-left 100ms ease-in;
+}
+.leaderBoardItem:hover {
+  border-left: 3px solid #3b5f80;
 }
 
-.highlight {
-  border-left: 3px solid #3b5f80;
+.leaderBoardItem.highlight:hover {
+  border-left: 3px solid #4299e1;
 }
 
 .points {
