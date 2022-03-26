@@ -9,14 +9,12 @@ import Link from "next/link";
 const transition = { type: "spring", stiffness: 500, damping: 50, mass: 1 };
 
 interface ItemProps {
-  id: number;
-  nome: string;
-  pages: number;
-  foto: string;
+  user: { id: number; nome: string; pages: number; foto: string };
 }
 
-const LeaderBoardItem: NextPage<ItemProps> = ({ nome, pages, foto, id }) => {
+const LeaderBoardItem: NextPage<ItemProps> = ({ user }) => {
   const [isPresent, safeToRemove] = usePresence();
+  const { nome, pages, foto, id } = user;
 
   const loggedUser = useContext(UserContext);
 
