@@ -11,7 +11,7 @@ const LeaderBoard: NextPage<{ users: User[] }> = ({ users }) => {
           {[...users]
             .sort((a, b) => b.pages - a.pages)
             .map(item => (
-              <LeaderBoardItem nome={item.skoob ? item.skoob : item.nome} pages={item.pages} key={item.nome} />
+              <LeaderBoardItem id={item.id} foto={item.foto} nome={item.skoob ? item.skoob : item.nome} pages={item.pages} key={item.nome} />
             ))}
         </AnimatePresence>
       </div>

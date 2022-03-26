@@ -1,4 +1,5 @@
 type User = {
+  id: number;
   nome: string;
   foto: string;
   skoob?: string;

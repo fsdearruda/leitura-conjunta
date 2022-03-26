@@ -12,7 +12,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
       let userInfo = await getSkoobUser(id);
       let userPages = await getUserPages(id);
 
-      return { ...userInfo, pages: userPages };
+      return { ...userInfo, pages: userPages, id };
     })
   );
 
