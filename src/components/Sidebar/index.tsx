@@ -1,16 +1,19 @@
-import type { NextPage } from "next";
 import React, { ReactNode } from "react";
-import { IconButton, useColorMode, Box, CloseButton, Flex, Icon, useColorModeValue, Link, Drawer, DrawerContent, Text, useDisclosure, BoxProps, FlexProps } from "@chakra-ui/react";
-import { FiHome, FiMenu, FiSun, FiMoon } from "react-icons/fi";
+import Link from "next/link";
+import { IconButton, useColorMode, Box, CloseButton, Flex, Icon, useColorModeValue, Drawer, DrawerContent, Text, useDisclosure, BoxProps, FlexProps } from "@chakra-ui/react";
+import { FiHome, FiMenu, FiSun, FiMoon, FiStar } from "react-icons/fi";
 import { IconType } from "react-icons";
 import { ReactText } from "react";
-import { SunIcon } from "@chakra-ui/icons";
 
 interface LinkItemProps {
   name: string;
   icon: IconType;
+  route: string;
 }
-const LinkItems: Array<LinkItemProps> = [{ name: "Home", icon: FiHome }];
+const LinkItems: Array<LinkItemProps> = [
+  { name: "Início", icon: FiHome, route: "/" },
+  { name: "Resenhas", icon: FiStar, route: "/reviews" },
+];
 
 export default function SimpleSidebar({ children }: { children: ReactNode }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -22,7 +25,7 @@ export default function SimpleSidebar({ children }: { children: ReactNode }) {
           <SidebarContent onClose={onClose} />
         </DrawerContent>
       </Drawer>
-      {/* mobilenav */}
+
       <MobileNav display={{ base: "flex", md: "none" }} onOpen={onOpen} />
       <Box ml={{ base: 0, md: 60 }} p="4">
         {children}
@@ -43,7 +46,7 @@ const ColorModeToggler = () => {
       role="group"
       cursor="pointer"
       _hover={{
-        bg: "#3b5f80",
+        bg: useColorModeValue("blue.200", "blue.900"),
         color: "white",
       }}
       transitionProperty="background-color, color"
@@ -84,7 +87,7 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
         <CloseButton display={{ base: "flex", md: "none" }} onClick={onClose} />
       </Flex>
       {LinkItems.map(link => (
-        <NavItem key={link.name} icon={link.icon}>
+        <NavItem route={link.route} key={link.name} icon={link.icon}>
           {link.name}
         </NavItem>
       ))}
@@ -96,37 +99,40 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
 interface NavItemProps extends FlexProps {
   icon: IconType;
   children: ReactText;
+  route: string;
 }
-const NavItem = ({ icon, children, ...rest }: NavItemProps) => {
+const NavItem = ({ icon, children, route, ...rest }: NavItemProps) => {
   return (
-    <Link href="#" style={{ textDecoration: "none" }} _focus={{ boxShadow: "none" }}>
-      <Flex
-        align="center"
-        p="4"
-        mx="4"
-        borderRadius="lg"
-        role="group"
-        cursor="pointer"
-        _hover={{
-          bg: "#3b5f80",
-          color: "white",
-        }}
-        transitionProperty="background-color"
-        transitionDuration="150ms"
-        {...rest}
-      >
-        {icon && (
-          <Icon
-            mr="4"
-            fontSize="16"
-            _groupHover={{
-              color: "white",
-            }}
-            as={icon}
-          />
-        )}
-        {children}
-      </Flex>
+    <Link href={route} passHref>
+      <a>
+        <Flex
+          align="center"
+          p="4"
+          mx="4"
+          borderRadius="lg"
+          role="group"
+          cursor="pointer"
+          _hover={{
+            bg: useColorModeValue("blue.200", "blue.900"),
+            color: "white",
+          }}
+          transitionProperty="background-color"
+          transitionDuration="150ms"
+          {...rest}
+        >
+          {icon && (
+            <Icon
+              mr="4"
+              fontSize="16"
+              _groupHover={{
+                color: "white",
+              }}
+              as={icon}
+            />
+          )}
+          {children}
+        </Flex>
+      </a>
     </Link>
   );
 };

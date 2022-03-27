@@ -15,7 +15,6 @@ interface ItemProps {
 const LeaderBoardItem: NextPage<ItemProps> = ({ user }) => {
   const [isPresent, safeToRemove] = usePresence();
   const { nome, skoob, pages, foto, id } = user;
-
   const loggedUser = useContext(UserContext);
 
   const animations = {
@@ -35,7 +34,7 @@ const LeaderBoardItem: NextPage<ItemProps> = ({ user }) => {
       <a>
         {/*  @ts-ignore: Object is possibly 'null'. */}
         <motion.div className={`${styles.leaderBoardItem} ${loggedUser.name === skoob ? styles.highlight : ""}`} {...animations}>
-          {/*  @ts-ignore: Object is possibly 'null'. */} 
+          {/*  @ts-ignore: Object is possibly 'null'. */}
           <Avatar border={"2px solid " + (loggedUser.name === skoob ? "#4299e1" : "#3b5f80")} size="sm" mr={4} name={skoob ? skoob.charAt(0) : nome.charAt(0)} src={foto} />
           <Text as="span">
             {skoob ? skoob : nome}
