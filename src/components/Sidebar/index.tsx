@@ -12,7 +12,7 @@ interface LinkItemProps {
 }
 const LinkItems: Array<LinkItemProps> = [
   { name: "Início", icon: FiHome, route: "/" },
-  { name: "Resenhas", icon: FiStar, route: "/reviews" },
+/*   { name: "Resenhas", icon: FiStar, route: "/reviews" }, */
   { name: "Ranking", icon: FiBarChart2, route: "/ranking" },
 ];
 
