@@ -2,7 +2,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import getSkoobUser from "../../utils/getSkoobUser";
 import getUserPages from "../../utils/getUserPages";
-import type User from "../../models/User";
+import type { User } from "../../models/User";
 
 const userIds: number[] = [7889983, 914318, 7902732, 7873228, 5393730, 5466125, 7054114];
 

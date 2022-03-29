@@ -1,7 +1,7 @@
 import React, { ReactNode } from "react";
 import Link from "next/link";
 import { IconButton, useColorMode, Box, CloseButton, Flex, Icon, useColorModeValue, Drawer, DrawerContent, Text, useDisclosure, BoxProps, FlexProps } from "@chakra-ui/react";
-import { FiHome, FiMenu, FiSun, FiMoon, FiStar } from "react-icons/fi";
+import { FiHome, FiMenu, FiSun, FiMoon, FiStar, FiBarChart2 } from "react-icons/fi";
 import { IconType } from "react-icons";
 import { ReactText } from "react";
 
@@ -13,6 +13,7 @@ interface LinkItemProps {
 const LinkItems: Array<LinkItemProps> = [
   { name: "Início", icon: FiHome, route: "/" },
   { name: "Resenhas", icon: FiStar, route: "/reviews" },
+  { name: "Ranking", icon: FiBarChart2, route: "/ranking" },
 ];
 
 export default function SimpleSidebar({ children }: { children: ReactNode }) {
@@ -46,7 +47,7 @@ const ColorModeToggler = () => {
       role="group"
       cursor="pointer"
       _hover={{
-        bg: useColorModeValue("blue.200", "blue.900"),
+        bg: "pink.500",
         color: "white",
       }}
       transitionProperty="background-color, color"
@@ -113,7 +114,7 @@ const NavItem = ({ icon, children, route, ...rest }: NavItemProps) => {
           role="group"
           cursor="pointer"
           _hover={{
-            bg: useColorModeValue("blue.200", "blue.900"),
+            bg: "pink.500",
             color: "white",
           }}
           transitionProperty="background-color"

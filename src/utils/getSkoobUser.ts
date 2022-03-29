@@ -9,11 +9,6 @@ interface SkoobResponse {
   };
 }
 
-type User = {
-  nome: string;
-  skoob: string;
-  foto: string;
-};
 const config = {
   headers: {
     Cookie:
@@ -21,19 +16,14 @@ const config = {
   },
 };
 
-// Cookies
-async function getUser<User>(userID: number) {
-  // Make a request to https://www.skoob.com.br/v1/user/1 with axios and store the response to a variable
+async function getUser(userID: number) {
   const response = await axios.get<SkoobResponse>(`https://www.skoob.com.br/v1/user/${userID}`, config);
-
-  // const response = await axios.get<SkoobResponse>("https://www.skoob.com.br/v1/user/1", { withCredentials: true,  });
   const data = response.data.response;
-  const user = {
+  return {
     nome: data.nome.trim(),
     skoob: data.skoob.trim(),
     foto: data.foto,
   };
-  return user;
 }
 
 export default getUser;

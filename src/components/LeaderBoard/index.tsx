@@ -1,9 +1,8 @@
 import { AnimatePresence } from "framer-motion";
-import type { NextPage } from "next";
 import LeaderBoardItem from "../LeaderBoardItem";
-import type User from "../../models/User";
+import type {User} from "../../models/User";
 
-const LeaderBoard: NextPage<{ users: User[] }> = ({ users }) => {
+const LeaderBoard = ({ users }: {users: User[]}) => {
   return (
     <div>
       <div className="center">

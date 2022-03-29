@@ -1,7 +1,8 @@
 import axios from "axios";
 import useSWR from "swr";
+import type { UserResponse } from "../models/User";
 
-function useFetch<Data = any>(route: string) {
+function useFetch<Data = UserResponse>(route: string) {
   const { data, error } = useSWR<Data>(
     route,
     async route => {

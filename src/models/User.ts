@@ -6,4 +6,10 @@ type User = {
   pages: number;
 };
 
-export default User;
+interface UserResponse {
+  nome: string;
+  skoob: string;
+  foto: string;
+}
+
+export type { User, UserResponse };

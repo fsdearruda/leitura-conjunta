@@ -1,29 +1,20 @@
 import type { NextPage } from "next";
-import useFetch from "../hooks/useFetch";
-import LeaderBoard from "../components/LeaderBoard";
-import type User from "../models/User";
+import { Text, Flex } from "@chakra-ui/react";
+import { Button } from "@chakra-ui/react";
 import Sidebar from "../components/Sidebar";
-import { Flex, Spinner, Text } from "@chakra-ui/react";
-
 const Home: NextPage = () => {
-  const { data } = useFetch<User[]>("users");
-
-  if (!data) {
-    return (
-      <Flex justifyContent="center" alignItems="center" direction="column">
-        <Text fontSize="3xl">Loading</Text>
-        <Spinner size="md" />
-      </Flex>
-    );
-  }
   return (
     <Sidebar>
-      <Flex my={7} justifyContent="center" alignItems="center" direction="column">
-        <Text mb={3} fontWeight={650} fontSize="3xl">
-          George Orwell 1984
+      <Flex justifyContent="start" alignItems="start" direction="column">
+        <Text lineHeight="5" fontWeight="bold" fontSize="4xl">
+          Leitura Conjunta
         </Text>
-        <LeaderBoard users={data} />
-        <Text color="gray.400">Preview</Text>
+        <Text color="pink.400" fontWeight="bold" fontSize="4xl">
+          13° Edição
+        </Text>
+        <Button color="white" bg="pink.500" _hover={{ bg: "pink.600", color: "pink.50" }}>
+          Participe da LC
+        </Button>
       </Flex>
     </Sidebar>
   );

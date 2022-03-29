@@ -1,19 +1,19 @@
 .leaderBoardItem {
   border-radius: 8px;
   margin: 0.5em;
-  background: #c2cad5;
+  background: #fff;
   color: #282829;
   padding: 1em;
-  border-left: 0px solid #c2cad5;
+  border-left: 0px solid #fff;
   width: 50vw;
   transition: border-left 100ms ease-in;
 }
 .leaderBoardItem:hover {
-  border-left: 3px solid #3b5f80;
+  border-left: 3px solid #f687b3;
 }
 
 .leaderBoardItem.highlight {
-  border-left: 3px solid #4299e1;
+  border-left: 3px solid #ed64a6;
 }
 
 .points {
@@ -27,7 +27,7 @@
   }
 }
 
-@media (max-width: 700px) {
+@media (max-width: 600px) {
   .leaderBoardItem {
     width: 90vw;
   }
