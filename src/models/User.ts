@@ -4,6 +4,7 @@ type User = {
   apelido: string;
   foto: string;
   skoob?: string;
+  pages: number;
   following: {
     success: 1 | 0;
     status: 1 | 0;
