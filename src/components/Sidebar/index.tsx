@@ -4,8 +4,11 @@ import { IconButton, useColorMode, Box, CloseButton, Flex, Icon, useColorModeVal
 import { FiHome, FiMenu, FiSun, FiMoon, FiStar, FiBarChart2 } from "react-icons/fi";
 import { IconType } from "react-icons";
 import { ReactText } from "react";
+import { BsTelegram } from "react-icons/bs";
+import { route } from "next/dist/server/router";
 
 interface LinkItemProps {
+  target?: string;
   name: string;
   icon: IconType;
   route: string;
@@ -14,6 +17,7 @@ const LinkItems: Array<LinkItemProps> = [
   /* { name: "Início", icon: FiHome, route: "/" }, */
   /*   { name: "Resenhas", icon: FiStar, route: "/reviews" }, */
   { name: "Ranking", icon: FiBarChart2, route: "/" },
+  { name: "Telegram", icon: BsTelegram, route: "https://t.me/lcmsfisher1", target: "_blank" },
 ];
 
 export default function SimpleSidebar({ children }: { children: ReactNode }) {
@@ -88,7 +92,7 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
         <CloseButton display={{ base: "flex", md: "none" }} onClick={onClose} />
       </Flex>
       {LinkItems.map(link => (
-        <NavItem route={link.route} key={link.name} icon={link.icon}>
+        <NavItem target={link?.target} route={link.route} key={link.name} icon={link.icon}>
           {link.name}
         </NavItem>
       ))}
@@ -98,14 +102,15 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
 };
 
 interface NavItemProps extends FlexProps {
+  target?: string;
   icon: IconType;
   children: ReactText;
   route: string;
 }
-const NavItem = ({ icon, children, route, ...rest }: NavItemProps) => {
+const NavItem = ({ icon, children, route, target, ...rest }: NavItemProps) => {
   return (
     <Link href={route} passHref>
-      <a>
+      <a target={target}>
         <Flex
           align="center"
           p="4"
