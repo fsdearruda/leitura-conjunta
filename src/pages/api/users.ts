@@ -5,7 +5,7 @@ import type { User } from "../../models/User";
 
 type ErrorMessage = {
   error: boolean;
-  message: string;
+  message: string | unknown;
 };
 
 const userIds: number[] = [7889983, 914318, 7902732, 7873228, 5393730, 5466125, 7054114];
@@ -30,6 +30,11 @@ const getUser = async (userID: string): Promise<User> => {
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse<User[] | ErrorMessage>) {
   if (req.method !== "GET") return res.status(405).json({ error: true, message: "Method not allowed" });
-  const users = await Promise.all(userIds.map(id => getUser(id.toString())));
-  return res.status(200).json(users);
+  try { 
+    const users = await Promise.all(userIds.map(id => getUser(id.toString())));
+    return res.status(200).json(users);
+   } catch(err) {
+     res.status(500).json({ error: true, message: err})
+   }
+
 }
