@@ -10,7 +10,7 @@ const Home: NextPage = () => {
         <Text fontWeight="bold" fontSize="4xl">
           Leitura Conjunta
         </Text>
-        <Link href="https://t.me/lcmsfisher1" passHref >
+        <Link href="https://t.me/lcmsfisher1" passHref>
           <a target="_blank">
             <Button color="white" bg="pink.500" _hover={{ bg: "pink.600", color: "pink.50" }}>
               Participe da LC <Icon ml={3} as={BsTelegram}></Icon>
