@@ -11,4 +11,4 @@ type SearchResult = {
   results: Book[];
 };
 
-export { SkoobResponse, SearchResult };
+export type { SkoobResponse, SearchResult };
