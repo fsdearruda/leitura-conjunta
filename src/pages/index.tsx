@@ -24,7 +24,7 @@ const LeaderboardPage: NextPage = () => {
           Quarto de despejo
         </Text>
         <LeaderBoard users={data} />
-        <Text color="gray.400">Preview</Text>
+        <Text color="gray.400">bom dia!</Text>
       </Flex>
     </Sidebar>
   );
