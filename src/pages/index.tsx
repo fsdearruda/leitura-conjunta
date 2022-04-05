@@ -1,25 +1,33 @@
 import type { NextPage } from "next";
-import Link from "next/link";
-import { Text, Flex, Button, Icon } from "@chakra-ui/react";
-import { BsTelegram } from "react-icons/bs";
+import useFetch from "../hooks/useFetch";
+import LeaderBoard from "../components/LeaderBoard";
+import type { User } from "../models/User";
+import { Flex, Spinner, Text } from "@chakra-ui/react";
 import Sidebar from "../components/Sidebar";
-const Home: NextPage = () => {
+const LeaderboardPage: NextPage = () => {
+  const { data } = useFetch<User[]>("users");
+
+  if (!data) {
+    return (
+      <Sidebar>
+        <Flex justifyContent="center" alignItems="center" direction="column">
+          <Text fontSize="3xl">Loading</Text>
+          <Spinner size="md" />
+        </Flex>
+      </Sidebar>
+    );
+  }
   return (
     <Sidebar>
-      <Flex justifyContent="start" alignItems="start" direction="column">
-        <Text fontWeight="bold" fontSize="4xl">
-          Leitura Conjunta
+      <Flex my={7} justifyContent="center" alignItems="center" direction="column">
+        <Text mb={3} fontWeight={650} fontSize="3xl">
+          Quarto de despejo
         </Text>
-        <Link href="https://t.me/lcmsfisher1" passHref>
-          <a target="_blank">
-            <Button color="white" bg="pink.500" _hover={{ bg: "pink.600", color: "pink.50" }}>
-              Participe da LC <Icon ml={3} as={BsTelegram}></Icon>
-            </Button>
-          </a>
-        </Link>
+        <LeaderBoard users={data} />
+        <Text color="gray.400">Preview</Text>
       </Flex>
     </Sidebar>
   );
 };
 
-export default Home;
+export default LeaderboardPage;

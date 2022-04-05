@@ -11,9 +11,9 @@ interface LinkItemProps {
   route: string;
 }
 const LinkItems: Array<LinkItemProps> = [
-  { name: "Início", icon: FiHome, route: "/" },
+  /* { name: "Início", icon: FiHome, route: "/" }, */
   /*   { name: "Resenhas", icon: FiStar, route: "/reviews" }, */
-  { name: "Ranking", icon: FiBarChart2, route: "/ranking" },
+  { name: "Ranking", icon: FiBarChart2, route: "/" },
 ];
 
 export default function SimpleSidebar({ children }: { children: ReactNode }) {

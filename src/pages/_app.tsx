@@ -13,7 +13,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       </Head>
 
       <ChakraProvider>
-        <UserContext.Provider value={{ name: "rapoxo" }}>
+        <UserContext.Provider value={{ name: "80qw4ty7h8" }}>
           <Component {...pageProps} />
         </UserContext.Provider>
       </ChakraProvider>
