@@ -31,7 +31,7 @@ const LeaderBoardItem = ({ user }: ItemProps) => {
 
   return (
     <Link href={`https://skoob.com.br/usuario/${id}`} passHref>
-      <a>
+      <a target="_blank">
         {/*  @ts-ignore: Object is possibly 'null'. */}
         <motion.div className={`${styles.leaderBoardItem} ${loggedUser.name === skoob ? styles.highlight : ""}`} {...animations}>
           {/*  @ts-ignore: Object is possibly 'null'. */}
