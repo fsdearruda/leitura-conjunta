@@ -21,7 +21,7 @@
   float: right;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 767px) {
   .leaderBoardItem {
     width: 80vw;
   }
