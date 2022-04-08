@@ -2,14 +2,14 @@ import axios from "axios";
 import useSWR from "swr";
 import type { UserResponse } from "../models/User";
 
-function useFetch<Data = UserResponse>(route: string) {
+function useFetch<Data = UserResponse>(route: string, refreshInterval?: number) {
   const { data, error } = useSWR<Data>(
     route,
     async route => {
       const response = await axios.get(`/api/${route}`);
       return response.data;
     },
-    { refreshInterval: 10000 }
+    refreshInterval ? { refreshInterval } : {}
   );
   return { data, error };
 }

@@ -5,7 +5,7 @@ import type { User } from "../../models/User";
 import { Flex, Spinner, Text } from "@chakra-ui/react";
 
 const OverlayPage: NextPage = () => {
-  const { data } = useFetch<User[]>("users");
+  const { data } = useFetch<User[]>("users", 10000);
 
   if (!data) {
     return (
