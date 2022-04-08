@@ -17,30 +17,27 @@ const Review = ({ bookID, name, review, date, isNew, rating, title }: ReviewProp
       direction="row"
       boxShadow="lg"
       rounded="md"
-      color={useColorModeValue("gray.900", "gray.50")}
+      /* color={useColorModeValue("gray.900", "gray.50")} */
+      color={useColorModeValue("gray.800", "pink.50")}
       bg={useColorModeValue("white", "gray.700")}
       width="100%"
       my={5}
       p="1rem"
-      mb="1rem"
       borderRadius="0.5rem"
     >
       <Avatar />
       <Box ml={5}>
         <Flex>
-          <Text fontSize="xl" fontWeight="bold">
+          <Text lineHeight="20px" fontSize="xl" fontWeight="bold">
             {name}
-            <Text mx={2} as="span">
-              •
-            </Text>
-            <Text as="span" fontSize="sm" fontWeight="thin">
-              {date}
-            </Text>
             {isNew && (
-              <Badge fontSize="0.7em" mb="1" borderRadius="md" color="pink.50" bg={highlightColor} ml="0.5rem">
+              <Badge userSelect="none" fontSize="0.7em" mb="1" borderRadius="md" color="pink.50" bg={highlightColor} ml="0.5rem">
                 Novo!
               </Badge>
             )}
+            <Text fontSize="sm" fontWeight="thin">
+              {date}
+            </Text>
           </Text>
         </Flex>
         <Flex direction="column">
@@ -53,7 +50,7 @@ const Review = ({ bookID, name, review, date, isNew, rating, title }: ReviewProp
         </Flex>
       </Box>
       <Spacer />
-      <Flex ml={4} alignSelf="flex-end">
+      <Flex userSelect="none" ml={4} alignSelf="flex-end">
         <Flex alignItems="center" justifyContent="center" h="3em" w="3em" borderRadius="3xl" bg={highlightColor}>
           <Text color="pink.50" fontSize="xl" fontWeight="bold">
             {rating}/5

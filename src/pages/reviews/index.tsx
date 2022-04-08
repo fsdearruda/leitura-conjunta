@@ -14,7 +14,6 @@ type ReviewType = {
 
 const mockReviews: ReviewType[] = [
   { name: "msfisher1", review: "Lorem ipsum dolor sit amet", date: "10/01/2020", bookID: 750929, rating: 5, title: "Lorem ipsum dolor sit amet" },
-  { name: "Jesus Cristo", review: "Lorem ipsum dolor sit amet", date: "28/02/2019", bookID: 750929, rating: 3, title: "Lorem ipsum" },
   {
     name: "Nice Colors ",
     title: "Lorem ipsum dolor sit",
@@ -26,8 +25,7 @@ const mockReviews: ReviewType[] = [
   {
     name: "Letícia",
     title: "Lorem ipsum dolor",
-    review:
-      "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consectetur, quibusdam. labore, quidem, quisquam. autem, quisquam. ea, quisquam. never gonna give you up, never gonna let you down, never gonna run around and desert you. Never gonna make you cry, never gonna say goodbye, never gonna tell a lie and hurt you.",
+    review: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consectetur, quibusdam. ",
     date: "28/03/2022",
     isNew: true,
     bookID: 750929,

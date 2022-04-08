@@ -1,8 +1,6 @@
 import { motion, usePresence } from "framer-motion";
-import { Text, Avatar } from "@chakra-ui/react";
-
-import styles from "./styles.module.css";
-import { useContext } from "react";
+import { Text, Avatar, useColorModeValue, Box, useMediaQuery } from "@chakra-ui/react";
+import { useContext, useState, useEffect } from "react";
 import { UserContext } from "../../contexts/UserContext";
 import Link from "next/link";
 
@@ -13,10 +11,16 @@ interface ItemProps {
 }
 
 const LeaderBoardItem = ({ user }: ItemProps) => {
+  const [desktopQuery] = useMediaQuery("(min-width: 1280px)");
+  const [isDesktop, setDesktop] = useState(false);
   const [isPresent, safeToRemove] = usePresence();
   const { nome, skoob, pages, foto, id } = user;
   const loggedUser = useContext(UserContext);
-
+  useEffect(() => {
+    if (desktopQuery) {
+      setDesktop(true);
+    }
+  }, [desktopQuery]);
   const animations = {
     layout: true,
     initial: "out",
@@ -31,21 +35,31 @@ const LeaderBoardItem = ({ user }: ItemProps) => {
 
   return (
     <Link href={`https://skoob.com.br/usuario/${id}`} passHref>
-      <a target="_blank">
-        {/*  @ts-ignore: Object is possibly 'null'. */}
-        <motion.div className={`${styles.leaderBoardItem} ${loggedUser.name === skoob ? styles.highlight : ""}`} {...animations}>
-          {/*  @ts-ignore: Object is possibly 'null'. */}
-          <Avatar border={"2px solid " + (loggedUser.name === skoob ? "#ED64A6" : "#F687B3")} size="sm" mr={4} name={skoob ? skoob.charAt(0) : nome.charAt(0)} src={foto} />
-          <Text as="span">
-            {skoob ? skoob : nome}
-            <Text as="span" className={styles.points}>
-              {pages}{" "}
-              <Text as="span" className={styles.pages}>
-                páginas
+      <a style={{ margin: ".8em" }} target="_blank">
+        <Box
+          p="1em"
+          w={isDesktop ? "50vw" : "90vw"}
+          minW="300px"
+          borderRadius="md"
+          borderLeft="0px solid"
+          borderLeftColor={useColorModeValue("white", "gray.700")}
+          background={useColorModeValue("white", "gray.700")}
+          _hover={{
+            borderLeft: "3px solid",
+            borderLeftColor: useColorModeValue("pink.400", "pink.600"),
+          }}
+          transition="border 150ms ease-in-out"
+        >
+          <motion.div {...animations}>
+            <Avatar size="sm" mr={4} name={skoob ? skoob.charAt(0) : nome.charAt(0)} src={foto} />
+            <Text as="span" color={useColorModeValue("gray.800", "gray.300")}>
+              {skoob ? skoob : nome}
+              <Text as="span" float="right" color={useColorModeValue("gray.800", "gray.200")}>
+                {pages} <Text as="span"  fontSize=".8rem" color={useColorModeValue("gray.400", "gray.400")}>páginas</Text>
               </Text>
             </Text>
-          </Text>
-        </motion.div>
+          </motion.div>
+        </Box>
       </a>
     </Link>
   );
