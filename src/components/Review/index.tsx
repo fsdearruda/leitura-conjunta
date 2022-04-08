@@ -10,8 +10,21 @@ interface ReviewProps {
   rating: number;
 }
 const Review = ({ bookID, name, review, date, isNew, rating, title }: ReviewProps) => {
+  const highlightColor = useColorModeValue("pink.400", "pink.600");
   return (
-    <Flex direction="row" boxShadow="lg" rounded="md" bg={"white"} color="black" width="100%" my={5} p="1rem" mb="1rem" border="1px solid #e2e8f0" borderRadius="0.5rem">
+    <Flex
+      maxW="500px"
+      direction="row"
+      boxShadow="lg"
+      rounded="md"
+      color={useColorModeValue("gray.900", "gray.50")}
+      bg={useColorModeValue("white", "gray.700")}
+      width="100%"
+      my={5}
+      p="1rem"
+      mb="1rem"
+      borderRadius="0.5rem"
+    >
       <Avatar />
       <Box ml={5}>
         <Flex>
@@ -24,7 +37,7 @@ const Review = ({ bookID, name, review, date, isNew, rating, title }: ReviewProp
               {date}
             </Text>
             {isNew && (
-              <Badge fontSize="0.7em" mb="1" borderRadius="md" color="pink.50" bg="pink.500" ml="0.5rem">
+              <Badge fontSize="0.7em" mb="1" borderRadius="md" color="pink.50" bg={highlightColor} ml="0.5rem">
                 Novo!
               </Badge>
             )}
@@ -40,13 +53,13 @@ const Review = ({ bookID, name, review, date, isNew, rating, title }: ReviewProp
         </Flex>
       </Box>
       <Spacer />
-      <Box>
-        <Flex alignItems="center" justifyContent="center" h="3em" w="3em" borderRadius="3xl" bg="pink.500">
+      <Flex ml={4} alignSelf="flex-end">
+        <Flex alignItems="center" justifyContent="center" h="3em" w="3em" borderRadius="3xl" bg={highlightColor}>
           <Text color="pink.50" fontSize="xl" fontWeight="bold">
             {rating}/5
           </Text>
         </Flex>
-      </Box>
+      </Flex>
     </Flex>
   );
 };
