@@ -8,7 +8,7 @@ import Link from "next/link";
 import { FiExternalLink } from "react-icons/fi";
 
 const LeaderboardPage: NextPage = () => {
-  const { data } = useFetch<User[]>("users");
+  const { data } = useFetch<User[]>("users", 10000);
 
   if (!data) {
     return (
@@ -31,7 +31,11 @@ const LeaderboardPage: NextPage = () => {
           </a>
         </Link>
         <LeaderBoard users={data} />
-        <Text color="gray.400">bom dia!</Text>
+        <Link href="https://twitch.tv/msfisher1" passHref>
+          <a>
+            <Text title="Twitch" _hover={{color: "purple.600"}} color="gray.400">LC Msfisher <Icon as={FiExternalLink} w={3} h={3} /></Text>
+          </a>
+        </Link>
       </Flex>
     </Sidebar>
   );

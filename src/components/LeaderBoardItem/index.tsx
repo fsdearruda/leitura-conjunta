@@ -1,7 +1,6 @@
 import { motion, usePresence } from "framer-motion";
 import { Text, Avatar, useColorModeValue, Box, useMediaQuery } from "@chakra-ui/react";
-import { useContext, useState, useEffect } from "react";
-import { UserContext } from "../../contexts/UserContext";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 
 const transition = { type: "spring", stiffness: 500, damping: 50, mass: 1 };
@@ -11,16 +10,16 @@ interface ItemProps {
 }
 
 const LeaderBoardItem = ({ user }: ItemProps) => {
-  const [desktopQuery] = useMediaQuery("(min-width: 1280px)");
-  const [isDesktop, setDesktop] = useState(false);
+  const isDarkMode = useColorModeValue(true, false);
+
+  const [loaded, setLoaded] = useState(false);
   const [isPresent, safeToRemove] = usePresence();
   const { nome, skoob, pages, foto, id } = user;
-  const loggedUser = useContext(UserContext);
+
   useEffect(() => {
-    if (desktopQuery) {
-      setDesktop(true);
-    }
-  }, [desktopQuery]);
+    if (!loaded) setLoaded(true);
+  }, [loaded]);
+
   const animations = {
     layout: true,
     initial: "out",
@@ -32,37 +31,44 @@ const LeaderBoardItem = ({ user }: ItemProps) => {
     onAnimationComplete: () => !isPresent && safeToRemove(),
     transition,
   };
-
-  return (
-    <Link href={`https://skoob.com.br/usuario/${id}`} passHref>
-      <a style={{ margin: ".8em" }} target="_blank">
-        <Box
-          p="1em"
-          w={isDesktop ? "50vw" : "90vw"}
-          minW="300px"
-          borderRadius="md"
-          borderLeft="0px solid"
-          borderLeftColor={useColorModeValue("white", "gray.700")}
-          background={useColorModeValue("white", "gray.700")}
-          _hover={{
-            borderLeft: "3px solid",
-            borderLeftColor: useColorModeValue("pink.400", "pink.600"),
-          }}
-          transition="border 150ms ease-in-out"
-        >
-          <motion.div {...animations}>
-            <Avatar size="sm" mr={4} name={skoob ? skoob.charAt(0) : nome.charAt(0)} src={foto} />
-            <Text as="span" color={useColorModeValue("gray.800", "gray.300")}>
-              {skoob ? skoob : nome}
-              <Text as="span" float="right" color={useColorModeValue("gray.800", "gray.200")}>
-                {pages} <Text as="span"  fontSize=".8rem" color={useColorModeValue("gray.400", "gray.400")}>páginas</Text>
+  const [isDesktop] = useMediaQuery("(min-width: 768px)");
+  if (loaded) {
+    return (
+      <Link href={`https://skoob.com.br/usuario/${id}`} passHref>
+        <a style={{ margin: ".8em" }} target="_blank">
+          <Box
+            p="1em"
+            w={isDesktop ? "50vw" : "90vw"}
+            minW="300px"
+            borderRadius="md"
+            borderLeft="0px solid"
+            borderLeftColor={isDarkMode ? "white" : "gray.700"}
+            background={isDarkMode ? "white" : "gray.700"}
+            _hover={{
+              borderLeft: "3px solid",
+              borderLeftColor: isDarkMode ? "pink.400" : "pink.600",
+            }}
+            transition="border 150ms ease-in-out"
+          >
+            <motion.div {...animations}>
+              <Avatar size="sm" mr={4} name={skoob ? skoob.charAt(0) : nome.charAt(0)} src={foto} />
+              <Text as="span" color={isDarkMode ? "gray.800" : "gray.300"}>
+                {skoob ? skoob : nome}
+                <Text as="span" float="right" color={isDarkMode ? "gray.800" : "gray.200"}>
+                  {pages}{" "}
+                  <Text as="span" fontSize=".8rem" color={isDarkMode ? "gray.400" : "gray.400"}>
+                    páginas
+                  </Text>
+                </Text>
               </Text>
-            </Text>
-          </motion.div>
-        </Box>
-      </a>
-    </Link>
-  );
+            </motion.div>
+          </Box>
+        </a>
+      </Link>
+    );
+  } else {
+    return <h1>oi</h1>;
+  }
 };
 
 export default LeaderBoardItem;

@@ -8,7 +8,7 @@ type ErrorMessage = {
   message: string | unknown;
 };
 
-const userIds: number[] = [7889983, 914318, 7902732, 7873228, 5393730, 5466125, 7054114];
+const userIds: number[] = [7889983, 914318, 7902732, 7873228, 5393730, 7054114];
 
 const getUserPages = async (userID: string) => {
   let totalPages = 0;

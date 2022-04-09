@@ -51,7 +51,7 @@ const ColorModeToggler = () => {
       role="group"
       cursor="pointer"
       _hover={{
-        bg: "pink.500",
+        bg: useColorModeValue("pink.400", "pink.600"),
         color: "white",
       }}
       transitionProperty="background-color, color"
@@ -119,7 +119,7 @@ const NavItem = ({ icon, children, route, target, ...rest }: NavItemProps) => {
           role="group"
           cursor="pointer"
           _hover={{
-            bg: "pink.500",
+            bg: useColorModeValue("pink.400", "pink.600"),
             color: "white",
           }}
           transitionProperty="background-color"
