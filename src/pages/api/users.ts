@@ -8,7 +8,7 @@ type ErrorMessage = {
   message: string | unknown;
 };
 
-const userIds: number[] = [7889983, 914318, 7902732, 7873228, 5393730, 7054114];
+const userIds: number[] = [7889983, 914318, 7902732, 7873228, 5393730, 7054114, 8810081, 6258890];
 
 const getUserPages = async (userID: string) => {
   let totalPages = 0;
@@ -30,11 +30,10 @@ const getUser = async (userID: string): Promise<User> => {
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse<User[] | ErrorMessage>) {
   if (req.method !== "GET") return res.status(405).json({ error: true, message: "Method not allowed" });
-  try { 
+  try {
     const users = await Promise.all(userIds.map(id => getUser(id.toString())));
     return res.status(200).json(users);
-   } catch(err) {
-     res.status(500).json({ error: true, message: err})
-   }
-
+  } catch (err) {
+    res.status(500).json({ error: true, message: err });
+  }
 }
