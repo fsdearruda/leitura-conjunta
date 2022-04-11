@@ -1,6 +1,8 @@
 import { Text, Flex } from "@chakra-ui/react";
 import Sidebar from "../../components/Sidebar";
 import Review from "../../components/Review";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 type ReviewType = {
   bookID: number;
@@ -37,7 +39,7 @@ const Reviews = () => {
   return (
     <Sidebar>
       <Flex justifyContent="start" alignItems="start" direction="column">
-        <Text m={10} p={0} fontWeight="bold" fontSize="4xl">
+        <Text fontWeight="bold" fontSize="4xl">
           Resenhas
         </Text>
         {mockReviews.map(review => (

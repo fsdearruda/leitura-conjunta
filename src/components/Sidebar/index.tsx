@@ -15,8 +15,8 @@ interface LinkItemProps {
 }
 const LinkItems: Array<LinkItemProps> = [
   /* { name: "Início", icon: FiHome, route: "/" }, */
-  /*   { name: "Resenhas", icon: FiStar, route: "/reviews" }, */
   { name: "Ranking", icon: FiBarChart2, route: "/" },
+  /* { name: "Resenhas", icon: FiStar, route: "/reviews" }, */
   { name: "Telegram", icon: BsTelegram, route: "https://t.me/lcmsfisher1", target: "_blank" },
 ];
 
