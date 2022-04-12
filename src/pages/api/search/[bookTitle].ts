@@ -1,6 +1,6 @@
-import { skoobSearch, skoobFetch } from "../../../../utils/skoobTools";
+import { skoobSearch, skoobFetch } from "../../../utils/skoobTools";
 import type { NextApiRequest, NextApiResponse } from "next";
-import type Book from "../../../../models/Book";
+import type Book from "../../../models/Book";
 
 const getBook = async (bookID: string): Promise<Book> => {
   let response = await skoobFetch(`book/${bookID}`);

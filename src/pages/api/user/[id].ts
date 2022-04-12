@@ -4,6 +4,7 @@ import type { User } from "../../../models/User";
 
 const getUserPages = async (userID: string) => {
   let totalPages = 0;
+
   let response = await skoobFetch(`bookcase/books/${userID}/shelf_id:0/limit:1000000`);
   response.forEach((book: any) => {
     if (book.livro_id === 7123) {

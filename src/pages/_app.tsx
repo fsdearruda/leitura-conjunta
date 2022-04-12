@@ -1,6 +1,6 @@
 import type { AppProps } from "next/app";
 import { ChakraProvider } from "@chakra-ui/react";
-
+import BackToTop from "../components/BackToTop";
 import Head from "next/head";
 
 function MyApp({ Component, pageProps }: AppProps) {
@@ -11,6 +11,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       </Head>
       <ChakraProvider>
         <Component {...pageProps} />
+        <BackToTop />
       </ChakraProvider>
     </>
   );

@@ -1,8 +1,9 @@
 import axios from "axios";
 import useSWR from "swr";
 import type { UserResponse } from "../models/User";
+import type Review from "../models/Review";
 
-function useFetch<Data = UserResponse>(route: string, refreshInterval?: number) {
+function useFetch<Data = UserResponse | Review[]>(route: string, refreshInterval?: number) {
   const { data, error } = useSWR<Data>(
     route,
     async route => {

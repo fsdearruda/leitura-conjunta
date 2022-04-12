@@ -1,51 +1,68 @@
 import { Text, Flex } from "@chakra-ui/react";
 import Sidebar from "../../components/Sidebar";
-import Review from "../../components/Review";
 import { useEffect, useState } from "react";
-import axios from "axios";
+import type ReviewType from "../../models/Review";
+import type { User } from "../../models/User";
+import Review from "../../components/Review";
+import userIDs from "../../utils/participating";
 
-type ReviewType = {
-  bookID: number;
-  name: string;
-  review: string;
-  date: string;
-  isNew?: boolean;
-  rating: number;
-  title: string;
+const isNew = (date: string): boolean => {
+  const dateArray = date.split("/");
+  const dateObject = new Date(Number(dateArray[2]), Number(dateArray[1]) - 1, Number(dateArray[0]));
+  const currentDate = new Date();
+  const oneWeek = 1000 * 60 * 60 * 24 * 7;
+  const diff = currentDate.getTime() - dateObject.getTime();
+  return diff < oneWeek;
 };
 
-const mockReviews: ReviewType[] = [
-  { name: "msfisher1", review: "Lorem ipsum dolor sit amet", date: "10/01/2020", bookID: 750929, rating: 5, title: "Lorem ipsum dolor sit amet" },
-  {
-    name: "Nice Colors ",
-    title: "Lorem ipsum dolor sit",
-    review: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat dolores nesciunt modi?",
-    date: "04/02/2021",
-    bookID: 750929,
-    rating: 5,
-  },
-  {
-    name: "Letícia",
-    title: "Lorem ipsum dolor",
-    review: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consectetur, quibusdam. ",
-    date: "28/03/2022",
-    isNew: true,
-    bookID: 750929,
-    rating: 4,
-  },
-];
+const getProfilePictures = () => {
+  let profilePics = Promise.all(
+    userIDs.map(async id => {
+      let data: User = await fetch(`/api/user/${id}`).then(res => res.json());
+      return { id: id, url: data.foto };
+    })
+  );
+  return profilePics;
+};
+
+interface ReviewProp extends ReviewType {
+  profilePicture: string | null;
+  isNew: boolean;
+}
 
 const Reviews = () => {
+  const [loaded, setLoaded] = useState(false);
+  const [reviews, setReviews] = useState<ReviewProp[]>([]);
+  useEffect(() => {
+    if (loaded) return;
+    const fetchReviews = async () => {
+      const pics = await getProfilePictures();
+      userIDs.map(async id => {
+        const data: ReviewType[] = await fetch(`/api/reviews/${id}`).then(res => res.json());
+        data.map(review => {
+          const newReview: ReviewProp = {
+            ...review,
+            author_id: id,
+            profilePicture: pics.find(pic => pic.id === id)?.url ?? null,
+            isNew: isNew(review.date),
+          };
+          setReviews(prevReviews => [...prevReviews, newReview]);
+        });
+      });
+      setLoaded(true);
+    };
+    fetchReviews();
+  });
   return (
     <Sidebar>
       <Flex justifyContent="start" alignItems="start" direction="column">
         <Text fontWeight="bold" fontSize="4xl">
           Resenhas
         </Text>
-        {mockReviews.map(review => (
-          <Review key={review.name} {...review} />
-        ))}
       </Flex>
+      {reviews.map(review => {
+        return <Review key={`${review.author_id}${review.book_id}`} {...review} />;
+      })}
     </Sidebar>
   );
 };
