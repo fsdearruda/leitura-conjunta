@@ -63,7 +63,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
             author: author.trim(),
             title: title ? title : null,
             date,
-            review: title ? reviewContent.split(date)[1].trim().split(title)[1].toString().replace(/\n/g, " ").replace(/\"/g, "'") : reviewContent.split(date)[1].trim() + "",
+            review: title ? reviewContent.split(date)[1].trim().split(title)[1].toString() : reviewContent.split(date)[1].trim() + "",
             rating: parseInt(<string>$(element).parent().find("star-rating").attr("rate")),
           };
           reviews.push(review);
