@@ -1,4 +1,4 @@
-import { Text, Flex } from "@chakra-ui/react";
+import { Text, Flex, Spinner } from "@chakra-ui/react";
 import Sidebar from "../../components/Sidebar";
 import { useEffect, useState } from "react";
 import type ReviewType from "../../models/Review";
@@ -33,6 +33,7 @@ interface ReviewProp extends ReviewType {
 const Reviews = () => {
   const [loaded, setLoaded] = useState(false);
   const [reviews, setReviews] = useState<ReviewProp[]>([]);
+
   useEffect(() => {
     if (loaded) return;
     const fetchReviews = async () => {
@@ -53,6 +54,7 @@ const Reviews = () => {
     };
     fetchReviews();
   });
+
   return (
     <Sidebar>
       <Flex justifyContent="start" alignItems="start" direction="column">
@@ -60,6 +62,12 @@ const Reviews = () => {
           Resenhas
         </Text>
       </Flex>
+      {!loaded && (
+        <Flex justifyContent="center" alignItems="center" direction="column">
+          <Text fontSize="3xl">Carregando</Text>
+          <Spinner size="md" />
+        </Flex>
+      )}
       {reviews.map(review => {
         return <Review key={`${review.author_id}${review.book_id}`} {...review} />;
       })}
