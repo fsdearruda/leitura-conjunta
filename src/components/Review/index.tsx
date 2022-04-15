@@ -1,4 +1,4 @@
-import { Flex, Text, Badge, Avatar, Box, Spacer, useColorMode } from "@chakra-ui/react";
+import { Flex, Text, Badge, Avatar, Box, Spacer, useColorMode, Collapse } from "@chakra-ui/react";
 import type ReviewType from "../../models/Review";
 import Link from "next/link";
 import { useState } from "react";
@@ -7,30 +7,13 @@ interface ReviewProps extends ReviewType {
   profilePicture: string | null;
 }
 
-const formatReview = (reviewText: string, visible: boolean): JSX.Element[] => {
-  const text = reviewText.split(" ");
-  if (visible && text.length > 50) {
-    text.length = 50;
-    text[49] += " ...";
-  }
-  return text
-    .join(" ")
-    .split("\n")
-    .map((line, i) => {
-      return <Text key={i}>{line} </Text>;
-    });
-};
-
 const Review = ({ book_id, author, title, date, review, rating, isNew, author_id, profilePicture }: ReviewProps) => {
   const { colorMode } = useColorMode();
   const formattable = review.split(" ").length > 50;
   const [visible, setVisible] = useState(false);
-  const [reviewText, setReviewText] = useState<JSX.Element[]>(formatReview(review, true));
 
   const handleClick = () => {
     setVisible(visibility => !visibility);
-    setReviewText(formatReview(review, visible));
-    console.log(visible);
   };
   return (
     <Flex
@@ -43,7 +26,6 @@ const Review = ({ book_id, author, title, date, review, rating, isNew, author_id
       my={7}
       p="1rem"
       borderRadius="20px"
-      // Teste
       borderTopLeftRadius={0}
     >
       <Box p={1} py={0}>
@@ -80,8 +62,15 @@ const Review = ({ book_id, author, title, date, review, rating, isNew, author_id
             {title}
           </Text>
           <Box>
-            <Text fontSize="sm">{reviewText}</Text>
-
+            <Collapse startingHeight={70} in={visible}>
+              {review
+                .split(" ")
+                .join(" ")
+                .split("\n")
+                .map((line, i) => {
+                  return <Text key={i}>{line.replace(/\uFFFD/g, "")} </Text>;
+                })}
+            </Collapse>
             {formattable && (
               <Box my={2}>
                 <Text as="span" cursor="pointer" fontWeight="semibold" color="pink.500" onClick={handleClick}>
