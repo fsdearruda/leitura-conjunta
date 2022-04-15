@@ -2,6 +2,7 @@ import { Flex, Text, Badge, Avatar, Box, Spacer, useColorMode, Collapse } from "
 import type ReviewType from "../../models/Review";
 import Link from "next/link";
 import { useState } from "react";
+import { TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons";
 interface ReviewProps extends ReviewType {
   isNew: boolean;
   profilePicture: string | null;
@@ -68,13 +69,13 @@ const Review = ({ book_id, author, title, date, review, rating, isNew, author_id
                 .join(" ")
                 .split("\n")
                 .map((line, i) => {
-                  return <Text key={i}>{line.replace(/\uFFFD/g, "")} </Text>;
+                  return <Text key={i}>{line}</Text>;
                 })}
             </Collapse>
             {formattable && (
               <Box my={2}>
                 <Text as="span" cursor="pointer" fontWeight="semibold" color="pink.500" onClick={handleClick}>
-                  Mostrar {visible ? "menos" : "mais"}
+                  Mostrar {visible ? "menos" : "mais"} {visible ? <TriangleUpIcon boxSize={3} /> : <TriangleDownIcon boxSize={3} />}
                 </Text>
               </Box>
             )}
