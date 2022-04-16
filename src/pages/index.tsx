@@ -13,13 +13,14 @@ const LeaderboardPage: NextPage = () => {
   if (!data) {
     return (
       <Sidebar>
-        <Flex justifyContent="center" alignItems="center" direction="column">
+        <Flex flexDirection="row" justifyContent="center" alignItems="center" direction="column">
           <Text fontSize="3xl">Carregando</Text>
           <Spinner size="md" />
         </Flex>
       </Sidebar>
     );
   }
+
   return (
     <Sidebar>
       <Flex my={7} justifyContent="center" alignItems="center" direction="column">

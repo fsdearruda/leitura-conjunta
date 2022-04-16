@@ -6,6 +6,8 @@ type Review = {
   date: string;
   review: string;
   rating: number;
+  isNew: boolean;
+  profilePicture: string | null;
 };
 
 export default Review;

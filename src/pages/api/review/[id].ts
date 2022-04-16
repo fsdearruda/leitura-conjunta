@@ -8,25 +8,30 @@ type ErrorMessage = {
   message: string | unknown;
 };
 
+const isNew = (date: string): boolean => {
+  const dateArray = date.split("/");
+  const dateObject = new Date(Number(dateArray[2]), Number(dateArray[1]) - 1, Number(dateArray[0]));
+  const currentDate = new Date();
+  const oneWeek = 1000 * 60 * 60 * 24 * 7;
+  const diff = currentDate.getTime() - dateObject.getTime();
+  return diff < oneWeek;
+};
+
 const fetchPages = async (userID: string) => {
   let page = await axios.get(`https://www.skoob.com.br/estante/resenhas/${userID}`, { responseEncoding: "binary" });
   const $ = cheerio.load(page.data.toString("ISO-8859-1"));
-  let pageCount = $(".paginacao_lista_busca_down > .numeros").children().length;
-
+  let pageCount = Math.ceil(parseInt($(".contador").children().first().text().split(" ")[0]) / 5);
   if (!pageCount) return [page.data];
+  console.log(pageCount);
   let pages = new Array(pageCount).fill(null);
   pages = await Promise.all(
-    pages.map(async page => {
-      let response = await axios.get(`https://www.skoob.com.br/estante/resenhas/${userID}/mpage:${pages.indexOf(page) + 1}`, { responseEncoding: "binary" });
+    pages.map(async (page, index) => {
+      let response = await axios.get(`https://www.skoob.com.br/estante/resenhas/${userID}/mpage:${index + 1}`, { responseEncoding: "binary" });
       return response.data;
     })
   );
+
   return pages;
-};
-// Usando por enquanto
-const fetchPagesTemp = async (userID: string) => {
-  let page = await axios.get(`https://www.skoob.com.br/estante/resenhas/${userID}`, { responseEncoding: "binary" });
-  return page;
 };
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse<Review[] | ErrorMessage>) {
@@ -35,11 +40,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
   if (!userID) return res.status(403).json({ error: true, message: "User ID not provided" });
   try {
     const reviews: Review[] = [];
-    const page = await fetchPagesTemp(userID);
-    /* 1 temporário, por algum motivo o loop não ta funcionando direito */
-    for (let i = 0; i < 1; i++) {
-      // adicionar pages[i]
-      const $ = cheerio.load(page.data.toString("ISO-8859-1"), { decodeEntities: false });
+    const pages = await fetchPages(userID);
+    pages.forEach(page => {
+      const $ = cheerio.load(page, { decodeEntities: false });
       $("div.curva2-5").each((i, el) => {
         const element = $(el);
         if (element.children().length === 1) {
@@ -65,12 +68,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
             date,
             review: title ? reviewContent.split(date)[1].trim().split(title)[1].toString() : reviewContent.split(date)[1].trim() + "",
             rating: parseInt(<string>$(element).parent().find("star-rating").attr("rate")),
+            isNew: isNew(date),
+            profilePicture: $(page).find(".round-4").find("img").attr("src") ?? null,
           };
           reviews.push(review);
         }
       });
-    }
-    res.status(200).json(reviews);
+    });
+    return res.status(200).json(reviews);
   } catch (err) {
     console.log(err);
   }

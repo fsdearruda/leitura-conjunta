@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { skoobFetch } from "../../utils/skoobTools";
-import participating from "../../utils/participating";
+import participating from "../../utils/participants";
 import type { User } from "../../models/User";
 
 type ErrorMessage = {
