@@ -25,9 +25,9 @@ const BackToTop = () => {
 
   return (
     <Box>
-      {scrollPosition > 500 && (
-        <Box onClick={backWeGo} position="fixed" bottom="20px" right={["16px", "84px"]} zIndex={1}>
-          <IconButton size="lg" icon={<FiArrowUpCircle />} aria-label="back to top button" />
+      {scrollPosition > 200 && (
+        <Box onClick={backWeGo} position="fixed" bottom="65px" right={["40px", "60px"]} zIndex={1}>
+          <IconButton bg="gray.900" opacity=".8" size="lg" icon={<FiArrowUpCircle />} aria-label="back to top button" />
         </Box>
       )}
     </Box>

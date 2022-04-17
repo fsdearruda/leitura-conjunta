@@ -2,25 +2,14 @@ import type { NextPage } from "next";
 import useFetch from "../hooks/useFetch";
 import LeaderBoard from "../components/LeaderBoard";
 import type { User } from "../models/User";
-import { Flex, Spinner, Text, Icon } from "@chakra-ui/react";
+import { Flex, Text, Icon } from "@chakra-ui/react";
 import Sidebar from "../components/Sidebar";
 import Link from "next/link";
 import { FiExternalLink } from "react-icons/fi";
+import Loading from "../components/Loading";
 
 const LeaderboardPage: NextPage = () => {
   const { data } = useFetch<User[]>("users", 10000);
-
-  if (!data) {
-    return (
-      <Sidebar>
-        <Flex flexDirection="row" justifyContent="center" alignItems="center" direction="column">
-          <Text fontSize="3xl">Carregando</Text>
-          <Spinner size="md" />
-        </Flex>
-      </Sidebar>
-    );
-  }
-
   return (
     <Sidebar>
       <Flex my={7} justifyContent="center" alignItems="center" direction="column">
@@ -31,14 +20,18 @@ const LeaderboardPage: NextPage = () => {
             </Text>
           </a>
         </Link>
-        <LeaderBoard users={data} />
-        <Link href="https://twitch.tv/msfisher1" passHref>
-          <a>
-            <Text title="Twitch" _hover={{ color: "purple.600" }} color="gray.400">
-              LC Msfisher <Icon as={FiExternalLink} w={3} h={3} />
-            </Text>
-          </a>
-        </Link>
+        {(data && (
+          <>
+            <LeaderBoard users={data} />
+            <Link href="https://twitch.tv/msfisher1" passHref>
+              <a>
+                <Text title="Twitch" _hover={{ color: "purple.600" }} color="gray.400">
+                  LC Msfisher <Icon as={FiExternalLink} w={3} h={3} />
+                </Text>
+              </a>
+            </Link>{" "}
+          </>
+        )) || <Loading />}
       </Flex>
     </Sidebar>
   );
