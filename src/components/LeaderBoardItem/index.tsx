@@ -1,5 +1,5 @@
 import { motion, usePresence } from "framer-motion";
-import { Text, Avatar, useColorModeValue, Box, useMediaQuery } from "@chakra-ui/react";
+import { Text, Avatar, useColorModeValue, Flex, Box, useMediaQuery, Spacer } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 
@@ -38,7 +38,7 @@ const LeaderBoardItem = ({ user }: ItemProps) => {
         <a style={{ margin: ".8em" }} target="_blank">
           <Box
             p="1em"
-            w={isDesktop ? "50vw" : "90vw"}
+            w={isDesktop ? "65vw" : "90vw"}
             minW="300px"
             borderRadius="md"
             borderLeft="0px solid"
@@ -50,16 +50,17 @@ const LeaderBoardItem = ({ user }: ItemProps) => {
             }}
             transition="border 150ms ease-in-out"
           >
-            <motion.div {...animations}>
+            <motion.div style={{ display: "flex", flexDirection: "row" }} {...animations}>
               <Avatar size="sm" mr={4} name={skoob ? skoob.charAt(0) : nome.charAt(0)} src={foto} />
-              <Text as="span" color={isDarkMode ? "gray.800" : "gray.300"}>
+              <Text alignSelf="center" as="span" color={isDarkMode ? "gray.800" : "gray.300"}>
                 {skoob ? skoob : nome}
-                <Text as="span" float="right" color={isDarkMode ? "gray.800" : "gray.200"}>
-                  {pages}{" "}
-                  <Text as="span" fontSize=".8rem" color={isDarkMode ? "gray.400" : "gray.400"}>
-                    páginas
-                  </Text>
-                </Text>
+              </Text>
+              <Spacer />
+              <Text alignSelf="center" as="span" float="right" color={isDarkMode ? "gray.800" : "gray.200"}>
+                {pages}{" "}
+              </Text>
+              <Text ml={1} alignSelf="center" as="span" fontSize=".8rem" color={isDarkMode ? "gray.400" : "gray.400"}>
+                páginas
               </Text>
             </motion.div>
           </Box>
@@ -67,7 +68,34 @@ const LeaderBoardItem = ({ user }: ItemProps) => {
       </Link>
     );
   } else {
-    return <h1>oi</h1>;
+    return (
+      <Flex
+        height="20px"
+        p="1em"
+        w={isDesktop ? "65vw" : "90vw"}
+        minW="300px"
+        borderRadius="md"
+        borderLeft="0px solid"
+        borderLeftColor={isDarkMode ? "white" : "gray.700"}
+        background={isDarkMode ? "white" : "gray.700"}
+        _hover={{
+          borderLeft: "3px solid",
+          borderLeftColor: isDarkMode ? "pink.400" : "pink.600",
+        }}
+        transition="border 150ms ease-in-out"
+      >
+        <motion.div {...animations}>
+          <Avatar size="sm" mr={4} name={skoob ? skoob.charAt(0) : nome.charAt(0)} src={foto} />
+          <Text as="span" color={isDarkMode ? "gray.800" : "gray.300"}>
+            <Text as="span" float="right" color={isDarkMode ? "gray.800" : "gray.200"}>
+              <Text as="span" fontSize=".8rem" color={isDarkMode ? "gray.400" : "gray.400"}>
+                páginas
+              </Text>
+            </Text>
+          </Text>
+        </motion.div>
+      </Flex>
+    );
   }
 };
 

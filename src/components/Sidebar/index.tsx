@@ -43,6 +43,7 @@ const ColorModeToggler = () => {
   const { colorMode, toggleColorMode } = useColorMode();
   return (
     <Flex
+      fontFamily="Jost"
       onClick={toggleColorMode}
       align="center"
       p="4"
@@ -86,7 +87,7 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
       {...rest}
     >
       <Flex my={4} h="20" alignItems="center" mx="8" justifyContent="space-between">
-        <Text fontSize="2xl" fontWeight="bold">
+        <Text fontFamily="Raleway" fontSize="2xl" fontWeight="bold">
           Leitura Conjunta
         </Text>
         <CloseButton display={{ base: "flex", md: "none" }} onClick={onClose} />
@@ -112,6 +113,7 @@ const NavItem = ({ icon, children, route, target, ...rest }: NavItemProps) => {
     <Link href={route} passHref>
       <a target={target}>
         <Flex
+          fontFamily="Jost"
           align="center"
           p="4"
           mx="4"
@@ -161,8 +163,8 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
     >
       <IconButton variant="outline" onClick={onOpen} aria-label="open menu" icon={<FiMenu />} />
 
-      <Text fontSize="2xl" ml="8" fontWeight="bold">
-        Leitura Conjunta
+      <Text fontFamily="Raleway" fontSize="2xl" ml="8" fontWeight="bold">
+        {window.location.href.split("/")[1] === "reviews" ? "Resenhas" : "Ranking" ?? "Leitura Conjunta"}
       </Text>
     </Flex>
   );

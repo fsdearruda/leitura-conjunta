@@ -18,6 +18,7 @@ const Review = ({ book_id, author, title, date, review, rating, isNew, author_id
   };
   return (
     <Flex
+      fontFamily="Raleway"
       maxW="70ch"
       direction="row"
       boxShadow="lg"
@@ -44,7 +45,7 @@ const Review = ({ book_id, author, title, date, review, rating, isNew, author_id
                   Novo!
                 </Badge>
               )}
-              <Text fontSize="sm" fontWeight="thin">
+              <Text fontFamily="Jost" fontSize="sm" fontWeight="thin">
                 {date}
               </Text>
             </Text>
@@ -52,7 +53,7 @@ const Review = ({ book_id, author, title, date, review, rating, isNew, author_id
           <Spacer />
           <Flex userSelect="none" ml={4} justifyContent="center" alignSelf="center">
             <Flex alignItems="center" justifyContent="center" h="3em" w="3em" borderRadius="3xl" bg={colorMode !== "dark" ? "pink.400" : "pink.600"}>
-              <Text color="pink.50" fontSize="xl" fontWeight="bold">
+              <Text fontFamily="Jost" color="pink.50" fontSize="xl" fontWeight="bold">
                 {rating}/5
               </Text>
             </Flex>
@@ -67,6 +68,7 @@ const Review = ({ book_id, author, title, date, review, rating, isNew, author_id
               {review
                 .split(" ")
                 .join(" ")
+                .trim()
                 .split("\n")
                 .map((line, i) => {
                   return <Text key={i}>{line}</Text>;
@@ -74,7 +76,7 @@ const Review = ({ book_id, author, title, date, review, rating, isNew, author_id
             </Collapse>
             {formattable && (
               <Box my={2}>
-                <Text as="span" cursor="pointer" fontWeight="semibold" color="pink.500" onClick={handleClick}>
+                <Text fontFamily="Jost" as="span" cursor="pointer" fontWeight="semibold" color="pink.500" onClick={handleClick}>
                   Mostrar {visible ? "menos" : "mais"} {visible ? <TriangleUpIcon boxSize={3} /> : <TriangleDownIcon boxSize={3} />}
                 </Text>
               </Box>

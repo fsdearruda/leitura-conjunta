@@ -11,7 +11,7 @@ const Reviews = () => {
   return (
     <Sidebar>
       <Flex justifyContent="start" alignItems="start" direction="column">
-        <Text fontWeight="bold" fontSize="4xl">
+        <Text fontFamily="Raleway" fontWeight="bold" fontSize="4xl">
           Resenhas
         </Text>
       </Flex>

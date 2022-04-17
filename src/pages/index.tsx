@@ -5,8 +5,9 @@ import type { User } from "../models/User";
 import { Flex, Text, Icon } from "@chakra-ui/react";
 import Sidebar from "../components/Sidebar";
 import Link from "next/link";
+import participants from "../utils/participants";
 import { FiExternalLink } from "react-icons/fi";
-import Loading from "../components/Loading";
+import LeaderBoardPlaceHolder from "../components/LeaderBoardPlaceHolder";
 
 const LeaderboardPage: NextPage = () => {
   const { data } = useFetch<User[]>("users", 10000);
@@ -15,7 +16,7 @@ const LeaderboardPage: NextPage = () => {
       <Flex my={7} justifyContent="center" alignItems="center" direction="column">
         <Link href="https://amzn.to/3DkTKuS" passHref>
           <a title="Link de afiliado Amazon" target="_blank">
-            <Text _hover={{ color: "pink.400" }} mb={3} fontWeight={650} fontSize="3xl">
+            <Text fontFamily="Jost" _hover={{ color: "pink.400" }} mb={3} fontWeight={650} fontSize="3xl">
               Quarto de despejo <Icon as={FiExternalLink} w={5} h={5} />
             </Text>
           </a>
@@ -25,13 +26,14 @@ const LeaderboardPage: NextPage = () => {
             <LeaderBoard users={data} />
             <Link href="https://twitch.tv/msfisher1" passHref>
               <a>
-                <Text title="Twitch" _hover={{ color: "purple.600" }} color="gray.400">
+                <Text fontFamily="Jost" title="Twitch" _hover={{ color: "purple.600" }} color="gray.400">
                   LC Msfisher <Icon as={FiExternalLink} w={3} h={3} />
                 </Text>
               </a>
-            </Link>{" "}
+            </Link>
           </>
-        )) || <Loading />}
+        )) ||
+          Array.from(Array(participants.length).keys()).map(i => <LeaderBoardPlaceHolder key={i} />)}
       </Flex>
     </Sidebar>
   );
