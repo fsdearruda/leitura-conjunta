@@ -36,31 +36,31 @@ const Review = ({ book_id, author, title, date, review, rating, isNew, author_id
             {profilePicture ? <Avatar name={author} src={profilePicture} /> : <Avatar name={author} />}
           </Flex>
           <Flex justifyContent="center" alignSelf="center">
-            <Text lineHeight="24px" fontSize="xl" fontWeight="bold">
+            <Text as="span" lineHeight="24px" fontSize="xl" fontWeight="bold">
               <Link href={`https://skoob.com.br/usuario/${author_id}`} passHref>
                 <a target="_blank">{author}</a>
               </Link>
               {isNew && (
-                <Badge userSelect="none" fontSize="0.7em" mb="1" borderRadius="md" color="pink.50" bg={colorMode !== "dark" ? "pink.400" : "pink.600"} ml="0.5rem">
+                <Badge fontSize="0.7em" borderRadius="md" color="pink.50" bg={colorMode !== "dark" ? "pink.400" : "pink.600"} ml="0.5rem">
                   Novo!
                 </Badge>
               )}
-              <Text fontFamily="Jost" fontSize="sm" fontWeight="thin">
+              <Text display="block" as="span" fontFamily="Jost" fontSize="sm" fontWeight="thin">
                 {date}
               </Text>
             </Text>
           </Flex>
           <Spacer />
-          <Flex userSelect="none" ml={4} justifyContent="center" alignSelf="center">
+          <Flex ml={4} justifyContent="center" alignSelf="center">
             <Flex alignItems="center" justifyContent="center" h="3em" w="3em" borderRadius="3xl" bg={colorMode !== "dark" ? "pink.400" : "pink.600"}>
-              <Text fontFamily="Jost" color="pink.50" fontSize="xl" fontWeight="bold">
+              <Text as="span" fontFamily="Jost" color="pink.50" fontSize="xl" fontWeight="bold">
                 {rating}/5
               </Text>
             </Flex>
           </Flex>
         </Flex>
         <Flex direction="column">
-          <Text fontSize="md" fontWeight="bold" lineHeight="1.5">
+          <Text as="span" fontSize="md" fontWeight="bold" lineHeight="1.5">
             {title}
           </Text>
           <Box>
@@ -71,12 +71,16 @@ const Review = ({ book_id, author, title, date, review, rating, isNew, author_id
                 .trim()
                 .split("\n")
                 .map((line, i) => {
-                  return <Text key={i}>{line}</Text>;
+                  return (
+                    <Text as="span" key={i}>
+                      {line}
+                    </Text>
+                  );
                 })}
             </Collapse>
             {formattable && (
               <Box my={2}>
-                <Text fontFamily="Jost" as="span" cursor="pointer" fontWeight="semibold" color="pink.500" onClick={handleClick}>
+                <Text userSelect="none" as="span" fontFamily="Jost" cursor="pointer" fontWeight="semibold" color="pink.500" onClick={handleClick}>
                   Mostrar {visible ? "menos" : "mais"} {visible ? <TriangleUpIcon boxSize={3} /> : <TriangleDownIcon boxSize={3} />}
                 </Text>
               </Box>
