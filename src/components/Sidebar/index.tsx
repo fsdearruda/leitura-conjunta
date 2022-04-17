@@ -164,7 +164,7 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
       <IconButton variant="outline" onClick={onOpen} aria-label="open menu" icon={<FiMenu />} />
 
       <Text fontFamily="Raleway" fontSize="2xl" ml="8" fontWeight="bold">
-        {window.location.href.split("/")[1] === "reviews" ? "Resenhas" : "Ranking" ?? "Leitura Conjunta"}
+        Leitura Conjunta
       </Text>
     </Flex>
   );
