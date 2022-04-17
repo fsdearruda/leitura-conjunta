@@ -37,6 +37,7 @@ const LeaderBoardItem = ({ user }: ItemProps) => {
       <Link href={`https://skoob.com.br/usuario/${id}`} passHref>
         <a style={{ margin: ".8em" }} target="_blank">
           <Box
+         fontFamily="Jost"   
             p="1em"
             w={isDesktop ? "65vw" : "90vw"}
             minW="300px"
