@@ -33,7 +33,7 @@ const LeaderboardPage: NextPage = () => {
             </Link>
           </>
         )) ||
-          Array.from(Array(participants.length).keys()).map(i => <LeaderBoardPlaceHolder key={i} />)}
+          participants.map((el, i) => <LeaderBoardPlaceHolder key={i} />)}
       </Flex>
     </Sidebar>
   );
