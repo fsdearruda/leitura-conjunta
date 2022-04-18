@@ -8,7 +8,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        <title>LC</title>
+        <title>{process.env.NODE_ENV === 'production' ? "LC" : "LC - Dev"}</title>
       </Head>
       <ChakraProvider>
         <Component {...pageProps} />
