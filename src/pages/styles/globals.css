@@ -1,3 +1,17 @@
 body {
   -webkit-tap-highlight-color: transparent;
 }
+
+body::-webkit-scrollbar {
+  width: 0.5rem;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: #a9a9a9;
+  border-radius: 3px;
+}
+
+body::-webkit-scrollbar-thumb:hover {
+  background: #858585;
+  outline: none;
+}

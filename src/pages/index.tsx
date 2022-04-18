@@ -6,6 +6,7 @@ import { Flex, Text, Icon } from "@chakra-ui/react";
 import Sidebar from "../components/Sidebar";
 import Link from "next/link";
 import participants from "../utils/participants";
+import { BsTwitch } from "react-icons/bs";
 import { FiExternalLink } from "react-icons/fi";
 import LeaderBoardPlaceHolder from "../components/LeaderBoardPlaceHolder";
 
@@ -24,16 +25,16 @@ const LeaderboardPage: NextPage = () => {
         {(data && (
           <>
             <LeaderBoard users={data} />
-            <Link href="https://twitch.tv/msfisher1" passHref>
-              <a>
-                <Text fontFamily="Jost" title="Twitch" _hover={{ color: "purple.600" }} color="gray.400">
-                  LC Msfisher <Icon as={FiExternalLink} w={3} h={3} />
-                </Text>
-              </a>
-            </Link>
           </>
         )) ||
           participants.map((el, i) => <LeaderBoardPlaceHolder key={i} />)}
+        <Link href="https://twitch.tv/msfisher1" passHref>
+          <a target="_blank">
+            <Text fontFamily="Jost" title="Twitch" _hover={{ color: "purple.600" }} color="gray.400">
+              LC Msfisher <Icon as={BsTwitch} w={3} h={3} />
+            </Text>
+          </a>
+        </Link>
       </Flex>
     </Sidebar>
   );

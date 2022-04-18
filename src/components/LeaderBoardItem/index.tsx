@@ -2,6 +2,7 @@ import { motion, usePresence } from "framer-motion";
 import { Text, Avatar, useColorModeValue, Flex, Box, useMediaQuery, Spacer } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import LeaderBoardPlaceHolder from "../LeaderBoardPlaceHolder";
 
 const transition = { type: "spring", stiffness: 500, damping: 50, mass: 1 };
 
@@ -11,7 +12,6 @@ interface ItemProps {
 
 const LeaderBoardItem = ({ user }: ItemProps) => {
   const isDarkMode = useColorModeValue(true, false);
-
   const [loaded, setLoaded] = useState(false);
   const [isPresent, safeToRemove] = usePresence();
   const { nome, skoob, pages, foto, id } = user;
@@ -37,7 +37,7 @@ const LeaderBoardItem = ({ user }: ItemProps) => {
       <Link href={`https://skoob.com.br/usuario/${id}`} passHref>
         <a style={{ margin: ".8em" }} target="_blank">
           <Box
-         fontFamily="Jost"   
+            fontFamily="Jost"
             p="1em"
             w={isDesktop ? "65vw" : "90vw"}
             minW="300px"
@@ -69,34 +69,7 @@ const LeaderBoardItem = ({ user }: ItemProps) => {
       </Link>
     );
   } else {
-    return (
-      <Flex
-        height="20px"
-        p="1em"
-        w={isDesktop ? "65vw" : "90vw"}
-        minW="300px"
-        borderRadius="md"
-        borderLeft="0px solid"
-        borderLeftColor={isDarkMode ? "white" : "gray.700"}
-        background={isDarkMode ? "white" : "gray.700"}
-        _hover={{
-          borderLeft: "3px solid",
-          borderLeftColor: isDarkMode ? "pink.400" : "pink.600",
-        }}
-        transition="border 150ms ease-in-out"
-      >
-        <motion.div {...animations}>
-          <Avatar size="sm" mr={4} name={skoob ? skoob.charAt(0) : nome.charAt(0)} src={foto} />
-          <Text as="span" color={isDarkMode ? "gray.800" : "gray.300"}>
-            <Text as="span" float="right" color={isDarkMode ? "gray.800" : "gray.200"}>
-              <Text as="span" fontSize=".8rem" color={isDarkMode ? "gray.400" : "gray.400"}>
-                páginas
-              </Text>
-            </Text>
-          </Text>
-        </motion.div>
-      </Flex>
-    );
+    return <LeaderBoardPlaceHolder />;
   }
 };
 

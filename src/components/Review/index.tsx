@@ -65,18 +65,16 @@ const Review = ({ book_id, author, title, date, review, rating, isNew, author_id
           </Text>
           <Box>
             <Collapse startingHeight={70} in={visible}>
-              {review
-                .split(" ")
-                .join(" ")
-                .trim()
-                .split("\n")
-                .map((line, i) => {
-                  return (
-                    <Text as="span" key={i}>
-                      {line}
-                    </Text>
-                  );
-                })}
+              <Text textAlign="justify">
+                {review
+                  .split(" ")
+                  .join(" ")
+                  .trim()
+                  .split("\n")
+                  .map((line, i) => {
+                    return <Text key={i}>{line}</Text>;
+                  })}
+              </Text>
             </Collapse>
             {formattable && (
               <Box my={2}>
