@@ -53,13 +53,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
                 .split(/(?=[A-Z])/)[0];
               let title: string[] | string = element
                 .first()
-                .find("strong")
+                .find("strong:eq(1)")
+
                 .text()
                 .split(/(?=[A-Z])/);
-              title.shift();
               title = title.join("").trim();
               const date = element.first().find("span").text().trim();
               const reviewContent = element.first().contents().text();
+
               const review: Review = {
                 author_id: parseInt(userID),
                 book_id: parseInt(<string>$(element).parent().find("star-rating").attr("id")),

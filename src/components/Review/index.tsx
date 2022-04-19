@@ -10,6 +10,7 @@ interface ReviewProps extends ReviewType {
 
 const Review = ({ book_id, author, title, date, review, rating, isNew, author_id, profilePicture }: ReviewProps) => {
   const { colorMode } = useColorMode();
+
   const formattable = review.split(" ").length > 50;
   const [visible, setVisible] = useState(false);
 
