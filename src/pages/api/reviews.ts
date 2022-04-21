@@ -46,21 +46,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
           $("div.curva2-5").each((i, el) => {
             const element = $(el);
             if (element.children().length === 1) {
-              const author = element
-                .first()
-                .find("strong")
-                .text()
-                .split(/(?=[A-Z])/)[0];
-              let title: string[] | string = element
-                .first()
-                .find("strong:eq(1)")
-
-                .text()
-                .split(/(?=[A-Z])/);
-              title = title.join("").trim();
+              const author = element.first().find("strong:eq(0)").text();
+              let title: string[] | string = element.first().find("strong:eq(1)").text();
               const date = element.first().find("span").text().trim();
               const reviewContent = element.first().contents().text();
-
               const review: Review = {
                 author_id: parseInt(userID),
                 book_id: parseInt(<string>$(element).parent().find("star-rating").attr("id")),

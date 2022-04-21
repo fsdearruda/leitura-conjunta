@@ -18,18 +18,17 @@ const isNew = (date: string): boolean => {
 };
 
 const fetchPages = async (userID: string) => {
-  let page = await axios.get(`https://www.skoob.com.br/estante/resenhas/${userID}`, { responseEncoding: "binary" });
+  const page = await axios.get(`https://www.skoob.com.br/estante/resenhas/${userID}`, { responseEncoding: "binary" });
   const $ = cheerio.load(page.data.toString("ISO-8859-1"));
-  let pageCount = Math.ceil(parseInt($(".contador").children().first().text().split(" ")[0]) / 5);
+  const pageCount = Math.ceil(parseInt($(".contador").children().first().text().split(" ")[0]) / 5);
   if (!pageCount) return [page.data];
   let pages = new Array(pageCount).fill(null);
-  pages = await Promise.all(
+  return await Promise.all(
     pages.map(async (page, index) => {
       let response = await axios.get(`https://www.skoob.com.br/estante/resenhas/${userID}/mpage:${index + 1}`, { responseEncoding: "binary" });
       return response.data;
     })
   );
-  return pages;
 };
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse<Review[] | ErrorMessage>) {
@@ -49,13 +48,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
             .find("strong")
             .text()
             .split(/(?=[A-Z])/)[0];
-          let title: string[] | string = element
-            .first()
-            .find("strong")
-            .text()
-            .split(/(?=[A-Z])/);
-          title.shift();
-          title = title.join("").trim();
+          let title: string[] | string = element.first().find("strong").text();
           const date = element.first().find("span").text().trim();
           const reviewContent = element.first().contents().text();
           const review: Review = {
