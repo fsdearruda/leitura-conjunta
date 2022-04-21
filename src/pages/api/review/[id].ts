@@ -22,7 +22,6 @@ const fetchPages = async (userID: string) => {
   const $ = cheerio.load(page.data.toString("ISO-8859-1"));
   let pageCount = Math.ceil(parseInt($(".contador").children().first().text().split(" ")[0]) / 5);
   if (!pageCount) return [page.data];
-  console.log(pageCount);
   let pages = new Array(pageCount).fill(null);
   pages = await Promise.all(
     pages.map(async (page, index) => {
@@ -30,7 +29,6 @@ const fetchPages = async (userID: string) => {
       return response.data;
     })
   );
-
   return pages;
 };
 
