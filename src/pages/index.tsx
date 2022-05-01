@@ -20,13 +20,12 @@ import { AiOutlineCalendar } from "react-icons/ai";
 const Home: NextPage = () => {
   return (
     <>
-      <Box maxW="1490px" w="100%" m="0 auto" px="2em" py="3em">
+      <Box maxW="1490px" w="fit-content" m="0 auto" px="2em" py="3em">
         <Flex flexDirection={{ base: "column", xl: "row" }}>
-          <HStack flexDirection={{ base: "column", md: "row" }}>
+          <HStack flexDirection={{ base: "column", md: "row" }} justifyContent="space-between"> 
             <Stack minW="400px">
               <Text
                 color="gray.700"
-                maxW={"400px"}
                 fontWeight="bold"
                 fontSize="5xl"
                 lineHeight="1.2"
@@ -52,7 +51,7 @@ const Home: NextPage = () => {
                 Participar da LC
               </Button>
             </Stack>
-            <Image src="/static/lchero.svg" alt="hero" width={580} height={560} />
+            <Image src="/static/lchero.svg" alt="hero" width={680} height={760} />
           </HStack>
           <Flex flexDirection={"column"}>
             <Heading mb={12} fontWeight="light" fontSize="2rem">
