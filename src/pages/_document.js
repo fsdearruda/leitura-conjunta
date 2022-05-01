@@ -10,6 +10,7 @@ class MyDocument extends Document {
           <link rel="apple-touch-icon" sizes="128x128" href={process.env.NODE_ENV === "production" ? "/static/home-icon.png" : "/static/dev-home-icon.png"} />
           <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet" />
           <link href="https://fonts.googleapis.com/css2?family=Jost&display=swap" rel="stylesheet" />
+          <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet"></link>
         </Head>
         <body>
           <ColorModeScript initialColorMode={theme.config.initialColorMode} />

@@ -1,43 +1,53 @@
 import type { NextPage } from "next";
-import useFetch from "../hooks/useFetch";
-import LeaderBoard from "../components/LeaderBoard";
-import type { User } from "../models/User";
-import { Flex, Text, Icon } from "@chakra-ui/react";
-import Sidebar from "../components/Sidebar";
-import Link from "next/link";
-import participants from "../utils/participants";
-import { BsTwitch } from "react-icons/bs";
 import { FiExternalLink } from "react-icons/fi";
-import LeaderBoardPlaceHolder from "../components/LeaderBoardPlaceHolder";
-
-const LeaderboardPage: NextPage = () => {
-  const { data } = useFetch<User[]>("users", 10000);
+import { Flex, Box, Text, Icon, Button, Progress, Spacer } from "@chakra-ui/react";
+const Home: NextPage = () => {
   return (
-    <Sidebar>
-      <Flex my={7} justifyContent="center" alignItems="center" direction="column">
-        <Link href="https://amzn.to/3DkTKuS" passHref>
-          <a title="Link de afiliado Amazon" target="_blank">
-            <Text fontFamily="Jost" _hover={{ color: "pink.400" }} mb={3} fontWeight={650} fontSize="3xl">
-              Quarto de despejo <Icon as={FiExternalLink} w={5} h={5} />
+    <Flex mx={40} direction="column">
+      <Flex maxW="30vw" my={7} justifyContent="center" alignItems="flex-start" direction="column">
+        <Flex maxW="50vw" fontFamily="Inter" direction="row">
+          <Flex direction="column">
+            <Text lineHeight="10" color="gray.700" fontWeight="bold" fontSize="3xl">
+              Leitura Conjunta
             </Text>
-          </a>
-        </Link>
-        {(data && (
-          <>
-            <LeaderBoard users={data} />
-          </>
-        )) ||
-          participants.map((el, i) => <LeaderBoardPlaceHolder key={i} />)}
-        <Link href="https://twitch.tv/msfisher1" passHref>
-          <a target="_blank">
-            <Text fontFamily="Jost" title="Twitch" _hover={{ color: "purple.600" }} color="gray.400">
-              LC Msfisher <Icon as={BsTwitch} w={3} h={3} />
+            <Text fontWeight="bold" fontSize="4xl" color="purple.500">
+              13° Edição
             </Text>
-          </a>
-        </Link>
+            <Text fontSize="lg" my={3}>
+              Almost anything can be represented in a tree structure Almost anything can be represen
+            </Text>
+            <Button size="md" fontWeight="light" maxW="20ch" color="white" colorScheme="purple">
+              Participar da LC
+            </Button>
+          </Flex>
+        </Flex>
       </Flex>
-    </Sidebar>
+      <Flex alignItems="center" borderRadius="20px" p={5} bg="#6389B8" maxW="90vw">
+        <Flex boxShadow="md" mr={5} borderRadius="20px" w="7em" justifyContent="center" alignItems="center" flexDirection="column" bg="white" p={5}>
+          <Text color="GrayText" fontSize="xl">
+            Ter
+          </Text>
+          <Text fontSize="xl" fontWeight="bold">
+            27
+          </Text>
+        </Flex>
+        <Flex w="10vw" direction="column">
+          <Flex alignItems="center" justifyContent="center" direction="row">
+            <Flex>
+              <Text fontSize="xl" color="blue.50">
+                Progresso
+              </Text>
+            </Flex>
+            <Spacer />
+            <Flex boxShadow="md" alignItems="center" w="5ch" justifyContent="center" borderRadius="lg" bg="white">
+              <Text m={.5} fontWeight="medium">20%</Text>
+            </Flex>
+          </Flex>
+          <Progress mt={3} value={20} size="md" height=".5rem" colorScheme="purple" />
+        </Flex>
+      </Flex>
+    </Flex>
   );
 };
 
-export default LeaderboardPage;
+export default Home;

@@ -1,12 +1,6 @@
-import { skoobFetch } from "../../../utils/skoobTools";
+import { getBook } from "../../../utils/skoobTools";
 import type { NextApiRequest, NextApiResponse } from "next";
 import type Book from "../../../models/Book";
-
-const getBook = async (bookID: string): Promise<Book> => {
-  let response = await skoobFetch(`book/${bookID}`);
-  const { id, livro_id, titulo, subtitulo, ano, paginas, autor, sinopse, editora, leitores, capa_grande } = response;
-  return { id, livro_id, titulo, subtitulo, ano, paginas, autor, sinopse, editora, leitores, capa: capa_grande };
-};
 
 type ErrorMessage = {
   error: boolean;
